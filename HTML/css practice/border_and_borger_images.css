@@ -1,0 +1,36 @@
+*{
+    padding: 2px;
+    color: aliceblue;
+    background-image :  url(1316116.jpg) ;
+}
+
+.class{
+    border: 2px  ;
+    border-radius: 20px;
+    border-style: dotted;
+    
+}
+#id{
+    border: 2px solid ;
+    border-radius: 20px;
+    border-style: outset ;
+    
+
+}
+
+#id2{
+    border: 20px double;
+    box-shadow: inset solid red;
+    border-radius: 10px;
+    border-top-color: black;
+    border-right-color: red;
+    border-bottom-color: rgb(255, 170, 0);
+    border-left-color: rgb(255, 242, 0);
+
+}
+h2{
+    border:10px solid transparent;
+    border-image: url(1316116.jpg) 20% repeat;
+    
+    
+}

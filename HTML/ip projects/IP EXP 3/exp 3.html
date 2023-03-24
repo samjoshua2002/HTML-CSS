@@ -1,0 +1,172 @@
+<html>
+<head>
+<title>JavaScript Form validation</title>
+<script>
+	// DEFINING A FUNCTION TO VALIDATE FORM
+function validateForm()                           
+    {
+        var v_name = v_email = v_mobile = v_country = v_gender = false;
+    	// Retrieving the values of form elements
+	var name = document.contactForm.name.value;
+	var email = document.contactForm.email.value;
+	var mobile = document.contactForm.mobile.value;
+	var country = document.contactForm.country.value;
+	var gender = document.contactForm.gender.value;
+	var hobbies = [];
+	var checkboxes = document.getElementsByName("hobbies[]");
+	for(var i=0; i < checkboxes.length; i++) 
+   	 {
+		if(checkboxes[i].checked) 
+    		  {
+    			  // Populate hobbies array with selected values
+        			    hobbies.push(checkboxes[i].value);
+   		   }
+	}
+	
+// Validate name
+if(name == "") 
+    {
+      alert("Please enter your name");
+      document.contactForm.name.focus();
+   } 
+    else 
+    {
+      var regex = /^[a-zA-Z\s]+$/;
+      if(regex.test(name) === false) 
+      {
+        alert("Please enter a valid name");
+        document.contactForm.name.focus();
+      } 
+      else
+      {
+       	v_name=true;
+      }
+        }
+	// Validate email address
+if(email == "") 
+    {
+		alert("Please enter your email address");
+       		 document.contactForm.email.focus();
+    } 
+    else 
+    {
+	// Regular expression for basic email validation
+	  var regex = /^\S+@\S+\.\S+$/;
+      if(regex.test(email) === false) 
+      {
+        alert("Please enter a valid email address");
+        document.contactForm.email.focus();
+      } 
+      else
+      {
+          		v_email=true;
+      }
+    }
+	
+// Validate mobile number
+   if(mobile == "") 
+   {
+      alert("Please enter your mobile number");
+      document.contactForm.mobile.focus();
+  } 
+    else 
+    {
+             var regex = /^[1-9]\d{9}$/;
+            if(regex.test(mobile) === false) 
+        {
+          	alert("Please enter a valid 10 digit mobile number");
+            document.contactForm.mobile.focus();
+        } 
+          else
+          {
+      		   v_mobile=true;
+          }
+}	
+// Validate country
+if(country == "Select") 
+    {
+      	alert("Please select your country");
+   } 
+else
+    {
+            v_country=true;
+    }
+	
+	
+// Validate gender
+if(gender == "") 
+    {
+     	alert("Please select your gender");
+   } 
+    else
+    {
+              v_gender=true;
+    }
+//PREVENT THE FORM FROM BEING SUBMITTED IF THERE ARE ANY ERRORS
+
+  if((v_name&&v_email&&v_mobile&&v_country&&v_gender)==false)
+     return false;
+  else
+    {
+        // Creating a string from input data for preview
+          var dataPreview = "You've entered the following details: \n\n" +
+                                         "Full Name: " + name + "\n\n" +
+                                          "Email Address: " + email + "\n\n" +
+                                           "Mobile Number: " + mobile + "\n\n" +
+                                            "Country: " + country + "\n\n" +
+                                             "Gender: " + gender + "\n\n";
+          if(hobbies.length) 
+            {
+              dataPreview += "Hobbies: " + hobbies.join(", ");
+            }
+            
+          // Display input data in a dialog box before submitting the form
+                    alert(dataPreview);
+       }
+}                      //CLOSING OF FUNCTION
+	
+</script>
+</head>
+<body bgcolor="SKYBLUE">
+<form name="contactForm" onsubmit="return validateForm()" method="post">
+
+<h2>Application Form </h2>
+
+<label>Full Name *</label>
+<input type="text" name="name">
+<br><br>
+	
+<label>Email Address</label>
+<input type="email" name="email">
+<br><br>
+	
+<label>Mobile Number</label>
+<input type="number" name="mobile" maxlength="10">
+<br><br>
+	
+<label>Country</label>
+<select name="country">
+          <option>Select</option>
+          <option>Australia</option>
+          <option>India</option>
+          <option>United States</option>
+          <option>United Kingdom</option>
+</select>
+ <br><br>
+	
+<label>Gender</label>
+<input type="radio" name="gender" value="male"> Male
+<input type="radio" name="gender" value="female"> Female
+<br><br>
+     
+<label>Hobbies <i>(Optional)</i></label>
+<input type="checkbox" name="hobbies[]" value="sports"> Sports
+<input type="checkbox" name="hobbies[]" value="movies"> Movies
+<input type="checkbox" name="hobbies[]" value="music"> Music
+<br><br> <br><br>
+     
+<input type="submit" value="Submit">
+
+</form>
+</body>
+</html>

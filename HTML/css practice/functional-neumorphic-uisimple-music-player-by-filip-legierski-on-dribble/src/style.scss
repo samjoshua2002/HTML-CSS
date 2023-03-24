@@ -1,0 +1,686 @@
+:root {
+  --main-dark: #25272a;
+  --neu-dark: #090a0c;
+  --neu-light: #252a30;
+  --back-gradient: linear-gradient(
+    180deg,
+    rgba(62, 67, 76, 1) 0%,
+    rgba(30, 32, 36, 1) 100%
+  );
+  --front-gradient: linear-gradient(
+    180deg,
+    rgba(49, 56, 61, 1) 0%,
+    rgba(24, 25, 29, 1) 100%
+  );
+  --header-button-wrapper-gradient: linear-gradient(
+    135deg,
+    rgba(43, 47, 52, 1) 0%,
+    rgba(49, 56, 61, 1) 100%
+  );
+  --header-button-wrapper-neu-shadows: 0.2vw 0.2vw 0.7vw #16191b,
+    -0.2vw -0.2vw 0.7vw #4c575f;
+  --header-pressed-wrapper-gradient: linear-gradient(
+    135deg,
+    rgba(218, 77, 12, 1) 0%,
+    rgba(180, 54, 19, 1) 100%
+  );
+  --header-normal-button-front-gradient: linear-gradient(
+    135deg,
+    rgba(46, 52, 57, 1) 0%,
+    rgba(27, 30, 34, 1) 100%
+  );
+  --header-pressed-button-front-gradient: linear-gradient(
+    135deg,
+    rgba(222, 57, 19, 1) 0%,
+    rgba(234, 81, 14, 1) 100%
+  );
+  --header-pressed-button-inset-shadows: inset 0.75vw 0.75vw 0.75vw
+    rgba(0, 0, 0, 0.3);
+  --main-cover-wrapper-gradient: linear-gradient(
+    135deg,
+    rgba(31, 36, 40, 1) 0%,
+    rgba(22, 23, 25, 1) 100%
+  );
+  --main-cover-neu-shadows: 0.5vw 0.5vw 0.5vw #1a1e20,
+    -0.5vw -0.5vw 0.75vw #363e44;
+  --slider-track-gradient: linear-gradient(
+    90deg,
+    rgba(217, 61, 7, 1) 0%,
+    rgba(147, 113, 20, 1) 100%
+  );
+
+  --controls-normal-button-wrapper-gradient: linear-gradient(
+    135deg,
+    rgba(32, 37, 41, 1) 0%,
+    rgba(22, 24, 25, 1) 100%
+  );
+  --controls-button-wrapper-neu-shadows: 0.2vw 0.2vw 0.5vw #16191b,
+    -0.2vw -0.2vw 0.5vw #363e44;
+  --controls-normal-button-front-gradient: linear-gradient(
+    135deg,
+    rgba(40, 43, 48, 1) 0%,
+    rgba(29, 32, 35, 1) 100%
+  );
+  --controls-normal-button-inset-shadows: inset 0 0 0.3vw
+    rgba(255, 255, 255, 0.1);
+  --controls-pressed-button-wrapper-gradient: linear-gradient(
+    135deg,
+    rgba(214, 78, 12, 1) 0%,
+    rgba(166, 47, 19, 1) 100%
+  );
+  --controls-pressed-button-front-gradient: linear-gradient(
+    135deg,
+    rgba(183, 29, 16, 1) 0%,
+    rgba(236, 86, 12, 1) 100%
+  );
+  --controls-pressed-button-inset-shadows: inset 0.75vw 0.75vw 0.75vw
+    rgba(0, 0, 0, 0.2);
+  --main-icon-text-color: rgba(255, 255, 255, 0.5);
+}
+
+@mixin flexy {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+@mixin adjust($number, $numtwo) {
+  background-size: $number, auto;
+  background-repeat: no-repeat;
+  background-position: $numtwo 52%, center;
+}
+@mixin dualGraphicControls($prop1, $prop2, $prop3, $prop4) {
+  background: $prop1, $prop2;
+  @include adjust($prop3, $prop4);
+}
+
+body {
+  display: flex;
+  height: 100vh;
+  background: var(--main-dark);
+}
+
+div {
+  border-radius: 50%;
+}
+button {
+  width: 100%;
+  height: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+@media (min-width: 550px) {
+  %small-button {
+    display: flex;
+    width: 4vw;
+    height: 4vw;
+    background: var(--header-button-wrapper-gradient);
+    box-shadow: var(--header-button-wrapper-neu-shadows);
+    &.pressed {
+      background: linear-gradient(
+        135deg,
+        rgba(218, 77, 12, 1) 0%,
+        rgba(180, 54, 19, 1) 100%
+      );
+    }
+    button {
+      margin: auto;
+      transform: scale(0.9);
+      &:active {
+        box-shadow: var(--header-pressed-button-inset-shadows);
+        transition: all 0.1s ease;
+      }
+    }
+  }
+  %big-button {
+    width: 6vw;
+    height: 6vw;
+    transform: translateY(-15%);
+    background: var(--controls-normal-button-wrapper-gradient);
+    box-shadow: var(--controls-button-wrapper-neu-shadows);
+    &.pressed {
+      background: var(--controls-pressed-button-wrapper-gradient);
+    }
+    button {
+      width: 100%;
+      height: 100%;
+      transform: scale(0.925);
+      background: var(--controls-normal-button-front-gradient);
+      box-shadow: var(--controls-normal-button-inset-shadows);
+      transition: all 0.1s linear;
+      &:active,
+      &.pressed {
+        box-shadow: var(--controls-pressed-button-inset-shadows);
+      }
+    }
+
+    &:nth-of-type(1) {
+      button {
+        @include dualGraphicControls(
+          url("https://ik.imagekit.io/g0osqsaljoz/go-to_icons/rewind-smooth-grey_phS9yVLxzQ.svg"),
+          var(--controls-normal-button-front-gradient),
+          20%,
+          45%
+        );
+        &:active {
+          @include dualGraphicControls(
+            url("https://ik.imagekit.io/g0osqsaljoz/go-to_icons/rewind-smooth-white_FD1zH584S-B.svg"),
+            var(--controls-pressed-button-front-gradient),
+            20%,
+            45%
+          );
+        }
+      }
+    }
+
+    &:nth-of-type(2) {
+      width: 7vw;
+      height: 7vw;
+      button {
+        @include dualGraphicControls(
+          url("https://ik.imagekit.io/g0osqsaljoz/go-to_icons/play-smooth-grey_6XsAGjQH72Ot.svg"),
+          var(--controls-normal-button-front-gradient),
+          20%,
+          50%
+        );
+
+        &:active,
+        &.pressed {
+          @include dualGraphicControls(
+            url("https://ik.imagekit.io/g0osqsaljoz/go-to_icons/pause-smooth-white_ZCASk4Ki1.svg"),
+            var(--controls-pressed-button-front-gradient),
+            20%,
+            50%
+          );
+        }
+      }
+    }
+    &:nth-of-type(3) {
+      button {
+        @include dualGraphicControls(
+          url("https://ik.imagekit.io/g0osqsaljoz/go-to_icons/forward-smooth-grey_1VHaYN1dVPC.svg"),
+          var(--controls-normal-button-front-gradient),
+          20%,
+          50%
+        );
+
+        &:active {
+          @include dualGraphicControls(
+            url("https://ik.imagekit.io/g0osqsaljoz/go-to_icons/forward-smooth-white_5nb4IDXja.svg"),
+            var(--controls-pressed-button-front-gradient),
+            20%,
+            50%
+          );
+        }
+      }
+    }
+  }
+
+  %neu-pic {
+    margin: auto;
+    @include flexy;
+    position: relative;
+    background: var(--main-cover-wrapper-gradient);
+    border-radius: 50%;
+    box-shadow: var(--main-cover-neu-shadows);
+    div {
+      border-radius: 50%;
+      background: url(https://ik.imagekit.io/g0osqsaljoz/album-cover_iw7fHN1BC.jpg);
+      background-size: cover;
+    }
+  }
+  .phone {
+    width: 28vw;
+    height: 60vw;
+    position: relative;
+    margin: auto;
+    background: var(--back-gradient);
+    border-radius: 3vw;
+    box-shadow: 2vw 2vw 8vw black;
+    &:before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 2.5vw;
+      transform: scale(0.97, 0.985);
+      background: var(--front-gradient);
+    }
+    .content {
+      text-align: center;
+      width: 97%;
+      height: 98.5%;
+      position: relative;
+      top: 0.75%;
+      left: 1.5%;
+      border-radius: 25px;
+      display: grid;
+      .header {
+        grid-area: header;
+        @include flexy;
+        padding-top: 2vw;
+        border-top-left-radius: 19px;
+        border-top-right-radius: 19px;
+        h1 {
+          font-size: 1.15vw;
+          width: calc(100% - 17vw);
+          color: var(--main-icon-text-color);
+        }
+      }
+    }
+    &:nth-of-type(1) {
+      transform: translate(30%, -2.5%);
+      .content {
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(18, 1fr);
+        grid-template-areas:
+          "header header header header header header header header"
+          "header header header header header header header header"
+          "main main main main main main main main"
+          "main main main main main main main main"
+          "main main main main main main main main"
+          "main main main main main main main main"
+          "main main main main main main main main"
+          "main main main main main main main main"
+          "main main main main main main main main"
+          "main main main main main main main main"
+          ". title title title title title title ."
+          ". title title title title title title ."
+          " slider slider slider slider slider slider slider slider"
+          " slider slider slider slider slider slider slider slider"
+          "controls controls controls controls controls controls controls controls"
+          "controls controls controls controls controls controls controls controls"
+          "controls controls controls controls controls controls controls controls"
+          "controls controls controls controls controls controls controls controls";
+
+        .header {
+          div {
+            @extend %small-button;
+            &:nth-of-type(1) {
+              button {
+                @include dualGraphicControls(
+                  url("https://ik.imagekit.io/g0osqsaljoz/go-to_icons/arrow-left-grey_Er2XRLPB2.svg"),
+                  var(--header-normal-button-front-gradient),
+                  30%,
+                  50%
+                );
+
+                &:active {
+                  @include dualGraphicControls(
+                    url("https://ik.imagekit.io/g0osqsaljoz/go-to_icons/arrow-left-white_n6gjnpl6PDC.svg"),
+                    var(--header-pressed-button-front-gradient),
+                    30%,
+                    50%
+                  );
+                }
+              }
+            }
+            &:nth-of-type(2) {
+              button {
+                @include dualGraphicControls(
+                  url("https://ik.imagekit.io/g0osqsaljoz/go-to_icons/menu-grey_Z9pv0VL_wSd.svg"),
+                  var(--header-normal-button-front-gradient),
+                  30%,
+                  50%
+                );
+                &:active {
+                  @include dualGraphicControls(
+                    url("https://ik.imagekit.io/g0osqsaljoz/go-to_icons/menu-white_26x_7SXWL0.svg"),
+                    var(--header-pressed-button-front-gradient),
+                    30%,
+                    50%
+                  );
+                }
+              }
+            }
+          }
+        }
+        .main {
+          grid-area: main;
+          display: flex;
+          article {
+            @extend %neu-pic;
+            top: -1%;
+            width: 22vw;
+            height: 22vw;
+            div {
+              width: 92.5%;
+              height: 92.5%;
+            }
+          }
+        }
+        .title {
+          grid-area: title;
+          position: relative;
+          h1 {
+            width: 100%;
+            position: relative;
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 1.6vw;
+          }
+          h3 {
+            width: 100%;
+            top: 40%;
+            left: 0;
+            position: absolute;
+            color: var(--main-icon-text-color);
+            font-size: 1.15vw;
+          }
+        }
+        .slider {
+          grid-area: slider;
+          position: relative;
+          display: flex;
+          @include flexy;
+
+          input[type="range"] {
+            appearance: none;
+            width: 90%;
+            height: 8%;
+            background: black;
+            box-shadow: inset 0 -1px 2px var(--main-icon-text-color);
+            border-radius: 1vw;
+
+            &:focus {
+              outline: 0;
+            }
+            &::-moz-focus-outer {
+              outline: 0;
+              border: 0;
+            }
+            &::-webkit-slider-thumb {
+              appearance: none;
+              width: 2.5vw;
+              height: 2.5vw;
+              border-radius: 50%;
+              background: radial-gradient(
+                circle,
+                orange 0,
+                orange 4px,
+                #24292d 4px,
+                #24292d 8px,
+                #212529 8px,
+                #212529
+              );
+              box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15),
+                inset 1px 0 1px rgba(255, 255, 255, 0.08),
+                inset -1px 0 1px rgba(255, 255, 255, 0.01),
+                inset 0 -1px 1px rgba(0, 0, 0, 0.5),
+                5px 5px 5px rgba(0, 0, 0, 0.4);
+              background-clip: border-box;
+              position: relative;
+            }
+            &::-moz-range-thumb {
+              width: 2.5vw;
+              height: 2.5vw;
+              border-radius: 50%;
+              background: radial-gradient(
+                circle,
+                orange 0,
+                orange 4px,
+                #24292d 4px,
+                #24292d 8px,
+                #212529 8px,
+                #212529
+              );
+              box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15),
+                inset 1px 0 1px rgba(255, 255, 255, 0.08),
+                inset -1px 0 1px rgba(255, 255, 255, 0.01),
+                inset 0 -1px 1px rgba(0, 0, 0, 0.5),
+                5px 5px 5px rgba(0, 0, 0, 0.4);
+              background-clip: border-box;
+              position: relative;
+              border: none;
+            }
+          }
+          label {
+            position: absolute;
+            width: 15%;
+            height: 20%;
+            top: 7%;
+            color: var(--main-icon-text-color);
+            font-size: 1vw;
+          }
+          #passed {
+            left: 3%;
+          }
+          #left {
+            right: 3%;
+          }
+        }
+
+        .controls {
+          grid-area: controls;
+          @include flexy;
+          div {
+            @extend %big-button;
+          }
+        }
+      }
+    }
+    &:nth-of-type(2) {
+      transform: translate(-30%, 2.5%);
+      .content {
+        position: relative;
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: 1fr 1fr 1fr 1fr repeat(6, 1fr);
+        grid-template-areas:
+          "header header header header header header header header"
+          "visual visual visual visual visual visual visual visual"
+          "visual visual visual visual visual visual visual visual"
+          "visual visual visual visual visual visual visual visual"
+          "catalog catalog catalog catalog catalog catalog catalog catalog"
+          "catalog catalog catalog catalog catalog catalog catalog catalog"
+          "catalog catalog catalog catalog catalog catalog catalog catalog"
+          "catalog catalog catalog catalog catalog catalog catalog catalog"
+          "catalog catalog catalog catalog catalog catalog catalog catalog"
+          "catalog catalog catalog catalog catalog catalog catalog catalog"
+          "catalog catalog catalog catalog catalog catalog catalog catalog";
+        .header {
+          grid-area: header;
+        }
+        .visual {
+          grid-area: visual;
+          width: 87.5%;
+          margin: auto;
+          @include flexy;
+
+          div {
+            @extend %small-button;
+
+            &:nth-of-type(1) {
+              transform: translate(12%, -5%);
+              button {
+                @include dualGraphicControls(
+                  url("https://generic-icons.s3.eu-west-3.amazonaws.com/heart-grey.svg"),
+                  var(--header-normal-button-front-gradient),
+                  30%,
+                  48%
+                );
+                &:active {
+                  @include dualGraphicControls(
+                    url("https://generic-icons.s3.eu-west-3.amazonaws.com/heart-white.svg"),
+                    var(--header-pressed-button-front-gradient),
+                    30%,
+                    48%
+                  );
+                }
+                &.pressed {
+                  @include dualGraphicControls(
+                    url("https://generic-icons.s3.eu-west-3.amazonaws.com/heart-white.svg"),
+                    var(--header-pressed-button-front-gradient),
+                    30%,
+                    48%
+                  );
+                }
+                &.heart-pressed {
+                  @include dualGraphicControls(
+                    url("https://generic-icons.s3.eu-west-3.amazonaws.com/heart-red.svg"),
+                    var(--header-normal-button-front-gradient),
+                    30%,
+                    48%
+                  );
+                }
+                &.heart-back {
+                  @include dualGraphicControls(
+                    url("https://generic-icons.s3.eu-west-3.amazonaws.com/heart-white.svg"),
+                    var(--header-pressed-button-front-gradient),
+                    30%,
+                    48%
+                  );
+                }
+              }
+            }
+            &:nth-of-type(2) {
+              transform: translate(-12%, -5%);
+              button {
+                @include dualGraphicControls(
+                  url("https://generic-icons.s3.eu-west-3.amazonaws.com/more-grey.svg"),
+                  var(--header-normal-button-front-gradient),
+                  30%,
+                  48%
+                );
+                background-position: 48% 50%, center;
+
+                &:active {
+                  @include dualGraphicControls(
+                    url("https://generic-icons.s3.eu-west-3.amazonaws.com/more-white.svg"),
+                    var(--header-pressed-button-front-gradient),
+                    30%,
+                    48%
+                  );
+                  background-position: 48% 50%, center;
+                }
+              }
+            }
+          }
+          article {
+            @extend %neu-pic;
+            transform: translateY(-5%);
+            width: 10vw;
+            height: 10vw;
+            div {
+              width: 90%;
+              height: 90%;
+              box-shadow: none;
+              transform: none !important;
+            }
+          }
+        }
+        .catalog {
+          grid-area: catalog;
+          position: relative;
+          display: flex;
+          overflow-y: scroll;
+          .catalog-content {
+            margin: auto;
+            width: 95%;
+            height: auto;
+            display: flex;
+            flex-wrap: wrap;
+            height: auto;
+
+            .entry-wrapper {
+              width: 100%;
+              height: 4.68vw;
+              border-radius: 1.25vw;
+              display: flex;
+              &.pressed {
+                background: linear-gradient(
+                  180deg,
+                  rgba(51, 57, 63, 1) 0%,
+                  rgba(18, 20, 23, 1) 100%
+                );
+              }
+              .entry {
+                width: 99%;
+                height: 95%;
+                margin: auto;
+                border-radius: 1.25vw;
+                display: grid;
+                grid-template-columns: repeat(6, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+                justify-items: start;
+                align-items: start;
+                gap: 0;
+                grid-template-areas:
+                  "title title title . . control"
+                  "sub sub sub . . control";
+                cursor: pointer;
+                &.pressed {
+                  background: linear-gradient(
+                    135deg,
+                    rgba(19, 21, 23, 1) 0%,
+                    rgba(27, 29, 32, 1) 100%
+                  );
+                }
+
+                h1 {
+                  grid-area: title;
+                  font-size: 1.2vw;
+                  margin-top: 9%;
+                  margin-left: 10%;
+                  color: rgba(255, 255, 255, 0.8);
+                  pointer-events: none;
+                }
+                h3 {
+                  grid-area: sub;
+                  text-align: left;
+                  font-size: 1vw;
+                  margin-top: -7%;
+                  margin-left: 10%;
+                  color: var(--main-icon-text-color);
+                  pointer-events: none;
+                }
+                div {
+                  grid-area: control;
+                  @extend %small-button;
+                  transform: translate(20%, 37.5%);
+                  width: 2.75vw;
+                  height: 2.75vw;
+                  button {
+                    @include dualGraphicControls(
+                      url("https://generic-icons.s3.eu-west-3.amazonaws.com/play-smooth-grey.svg"),
+                      var(--header-normal-button-front-gradient),
+                      30%,
+                      50%
+                    );
+                    background-position: center, center;
+                    &.pressed {
+                      @include dualGraphicControls(
+                        url("https://generic-icons.s3.eu-west-3.amazonaws.com/pause-smooth-white.svg"),
+                        var(--header-pressed-button-front-gradient),
+                        30%,
+                        50%
+                      );
+                      background-position: center, center;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        &:after {
+          content: "";
+          width: 99%;
+          height: 15%;
+          background: linear-gradient(to top, rgba(28, 30, 34, 1), transparent);
+          position: absolute;
+          left: 0.5%;
+          bottom: 0;
+          border-bottom-left-radius: 20px;
+          border-bottom-right-radius: 20px;
+          pointer-events: none;
+        }
+      }
+    }
+  }
+}
+
+/*
+
+*/

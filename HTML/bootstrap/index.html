@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News-App</title>
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- js link -->
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <script src="index.js"></script>
+    <!-- js link -->
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+       
+        
+        <a class="navbar-brand" href="index.html">News-App</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="Trending.html">Trending</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="World-news.html">World-news</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Sports.html">Sports</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Cinema.html">Cinema</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Politics.html">Politics</a>
+            </li>
+          
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+<!-- CARDS -->
+
+<div class="row row-cols-1 row-cols-md-4 g-4">
+  <div class="row" id="image-gallery">
+    <?php
+      // Get a list of image file names in the "assets/images/logo/" directory
+      $imageNames = scandir('assets/images/logo/');
+    
+      // Loop through the array and generate HTML code for each image
+      foreach ($imageNames as $imageName) {
+        // Ignore any non-image files (e.g. ".", "..", and hidden files)
+        if (!in_array($imageName, array('.', '..', '.htaccess'))) {
+          // Generate HTML code for the image card
+          echo '
+            <div class="col">
+              <div class="card h-100">
+                <img src="assets/images/logo/'.$imageName.'" class="card-img-top" alt="...">
+                <div class="card-body position-relative">
+                  <p class="card-text">'.pathinfo($imageName, PATHINFO_FILENAME).'</p>
+                </div>
+              </div>
+            </div>
+          ';
+        }
+      }
+    ?>
+  </div>
+  
+  </div>
+  
+ 
+
+
+
+
+
+  
+  
+
+  
+</div> 
+    
+
+   
+
+
+
+    
+</body>
+</html>

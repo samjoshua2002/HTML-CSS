@@ -1,0 +1,14 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Open MainPage.html",
+            "file": "f:\\html\\ip projects\\IP EXP 4\\EXP 4.1\\MainPage.html"
+        }
+    ]
+}
